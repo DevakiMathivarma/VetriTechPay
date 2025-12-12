@@ -27,11 +27,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'replace-me-with-a-secret-in-production')
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('1', 'true', 'yes')
 
 # ALLOWED_HOSTS can be comma separated in .env
-allowed = os.getenv('ALLOWED_HOSTS', '')
-if allowed:
-    ALLOWED_HOSTS = [h.strip() for h in allowed.split(',')]
-else:
-    ALLOWED_HOSTS = ["*"]
+_raw_allowed = os.getenv("ALLOWED_HOSTS", "vetritechpay.onrender.com,localhost,127.0.0.1")
+ALLOWED_HOSTS = [h.strip() for h in _raw_allowed.split(",") if h.strip()]
+
 
 AUTH_USER_MODEL = 'core.User'
 
